@@ -5,10 +5,13 @@ echo "Welcome to use git-clone-all-branches toolkit developed by Krxkli"
 echo "请输入克隆链接: "
 read repo_url
 
-echo "请输入仓库名:"
-read repo_name
+#echo "请输入仓库名:"
+#read repo_name
 
-git clone $repo_url
+clone_info="git-clone-all-branches-name.log"
+git clone --progress $repo_url &> $clone_info
+repo_name=$(head $clone_info -n 1 | cut -d "'" -f 2)
+rm ${clone_info}
 
 cd $repo_name
 
